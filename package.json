@@ -1,0 +1,30 @@
+{
+  "name": "react-bem-classes",
+  "version": "1.0.0-rc1",
+  "description": "Decorator for reactjs components",
+  "main": "index.js",
+  "scripts": {
+    "prepublish": "babel src/index.js  --out-file index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilyaagarkov/react-bem-classes.git"
+  },
+  "keywords": [
+    "react",
+    "bem",
+    "className",
+    "decorator"
+  ],
+  "author": "Ilya Agarkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ilyaagarkov/react-bem-classes/issues"
+  },
+  "homepage": "https://github.com/ilyaagarkov/react-bem-classes#readme",
+  "devDependencies": {
+    "babel": "^6.1.5",
+    "babel-cli": "^6.1.4",
+    "babel-preset-es2015": "^6.1.4"
+  }
+}
