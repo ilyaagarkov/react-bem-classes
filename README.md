@@ -14,7 +14,7 @@ import React from 'react';
 import 'bem' from 'react-bem-classes';
 
 
-//with decorators
+//with decorator
 @bem({
   block: 'user',
   modifiers: ['type']
@@ -36,7 +36,7 @@ export default User;
 ```
 
 ```js
-//with decorators
+//without decorators
 
 class User extends React.Comoponent{
 
@@ -58,11 +58,10 @@ bem(User,
 
 export default User;
 
-/*
-or
+//or
 export default bem(User, 
   block: 'user',
   modifiers: ['type']
 })
-*/
+
 ```
