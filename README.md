@@ -74,15 +74,15 @@ You can pass modifiers as props when you are using your component
 
 @bem({
   block: "list",  // name of your block
-  modifiers: ['size', ''] // list modifiers available through props
+  modifiers: ['size', 'isOpened'] // list modifiers available through props
 })
 class List extends React.Component{
 
   render(){
 
     return(
-      <div className={this.block()}>  // 
-        <div className={this.element('item')}></div>  //  <div class="list__item"></div>
+      <div className={this.block()}>
+        //...
       </div>
     )
   }
@@ -91,8 +91,45 @@ class List extends React.Component{
 class MyApp extends React.Component{
 
   render(){
-    return <List size="large" isOpened /> // <div class="list list--size-large list--isOpened">...</div>
+    return <List size="large" isOpened /> 
   }
+  
+  // rendered <div class="list list--size-large list--isOpened">...</div>
 
 }
+```
+## Both element and block
+```js
+@bem({
+  block: 'user'
+})
+class User extends React.Component{
+  render(){
+    return(
+      <div className={this.block()}>
+      </div>
+    )
+  }
+}
+
+@bem({
+  block: 'list'
+})
+class List extends React.Component{
+
+  render(){
+    <div className={this.block()}>
+      <div className={this.element('item')}></div>
+    </div>
+  }
+  /* rendered 
+    <div class="list">
+      <div className="list__item user">
+    </div>
+  
+  */ 
+  
+}
+
+
 ```
