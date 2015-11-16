@@ -19,39 +19,40 @@ function createModifier(baseClass, modifierName, modifierValue){
 
 module.exports = options => Component => {
 
-  console.log('Component', Component)
-
   const {block, modifiers} = options;
-  console.log(Component.prototype)
 
-  Component.prototype.block = function(passed = {}){
-    let classesSet = [];
-    if(this.props.className){
-      classesSet.push(this.props.className);
-    }
+  Object.assign(Component.prototype, {
 
-    classesSet.push(block);
+    block(passedmodifiers = {}){
+      let classesSet = [];
+      if(this.props.className){
+        classesSet.push(this.props.className);
+      }
 
-    const
+      classesSet.push(block);
+
+      const
         modifiersFromProps = (modifiers || [])
-            .filter(modifierName=>!!this.props[modifierName])
-            .map(modifierName => createModifier(block, modifierName, this.props[modifierName])),
-        modifiersFromArguments = modifiersFromObj(block, passed);
+          .filter(modifierName=>!!this.props[modifierName])
+          .map(modifierName => createModifier(block, modifierName, this.props[modifierName])),
+        modifiersFromArguments = modifiersFromObj(block, passedmodifiers);
 
-    classesSet.push(...modifiersFromProps, ...modifiersFromArguments);
+      classesSet.push(...modifiersFromProps, ...modifiersFromArguments);
 
-    return classesSet.join(' ');
-  };
+      return classesSet.join(' ');
+    },
 
-  Component.prototype.element = function(element, modifiers){
-    let classesSet = [];
-    const
-        elementClass = `${block}__${element}`,
+    element(elementName, modifiers){
+      const
+        elementClass = `${block}__${elementName}`,
         modifiersClasses = modifiersFromObj(elementClass, modifiers);
 
-    classesSet.push(elementClass, ...modifiersClasses);
-    return classesSet.join(' ');
-  };
+      return [
+        elementClass,
+        ...modifiersClasses
+      ].join(' ');
+    }
+  });
 
   return Component;
 

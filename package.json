@@ -1,6 +1,6 @@
 {
   "name": "react-bem-classes",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0",
   "description": "Decorator for reactjs components",
   "main": "index.js",
   "scripts": {
