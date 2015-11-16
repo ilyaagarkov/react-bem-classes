@@ -55,8 +55,8 @@ export default bem(User,
 ```
 ## Modifiers
 Methods this.block and this.elements may accept additional a parameter with modifiers
- this.block(modifiers)
- this.element(elementName, modifiers)
+ - `this.block(modifiers)`
+ - `this.element(elementName, modifiers)`
  
 Example 
 ```js
