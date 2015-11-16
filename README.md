@@ -125,8 +125,7 @@ class List extends React.Component{
   /* rendered 
     <div class="list">
       <div className="list__item user">
-    </div>
-  
+    </div> 
   */ 
   
 }
