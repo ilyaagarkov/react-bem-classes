@@ -12,8 +12,6 @@ import React from 'react';
 import 'bem' from 'react-bem-classes';
 
 
-//with decorator
-
 @bem({
   block: "list",  // name of your block
   modifiers: ['size', 'isOpened'] // list modifiers available through props
@@ -33,26 +31,6 @@ class List extends React.Component{
 export default List;
 ```
 
-```js
-//without decorators
-
-class List extends React.Component{
-   // ... 
-}
-
-bem(User, 
-  block: "list", 
-  modifiers: ['size'] 
-})
-
-export default User;
-
-//or
-export default bem(User, 
-  block: "list", 
-  modifiers: ['size'] 
-})
-```
 ## Modifiers
 Methods this.block and this.elements may accept additional a parameter with modifiers
  - `this.block(modifiers)`
