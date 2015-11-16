@@ -13,46 +13,86 @@ import 'bem' from 'react-bem-classes';
 
 
 //with decorator
+
 @bem({
-  block: 'user', // name of your block
-  modifiers: ['type', 'status'] // list modifiers available [through props](#Modifiers through props)
+  block: "list",  // name of your block
+  modifiers: ['size', 'isOpened'] // list modifiers available through props
 })
-class User extends React.Comoponent{
+class List extends React.Component{
 
   render(){
+
     return(
-      <div className={this.block()}>   // => <div class="user"></div>
-        <div className={this.element('name')}>Joe</div>  // => <div class="user__name"></div>
-        <div className={this.element('status')}>online</div>  // => <div class="user_status"></div>
+      <div className={this.block()}>  // <div class="list"></div>
+        <div className={this.element('item')}></div>  //  <div class="list__item"></div>
       </div>
     )
   }
-  
 }
 
-export default User;
+export default List;
 ```
 
 ```js
 //without decorators
 
-class User extends React.Comoponent{
+class List extends React.Component{
    // ... 
 }
 
 bem(User, 
-  block: 'user', 
-  modifiers: ['type']
+  block: "list", 
+  modifiers: ['size'] 
 })
 
 export default User;
 
 //or
 export default bem(User, 
-  block: 'user',
-  modifiers: ['type']
+  block: "list", 
+  modifiers: ['size'] 
 })
+```
+## Modifiers
+Methods this.block and this.elements may accept additional a parameter with modifiers
+ this.block(modifiers)
+ this.element(elementName, modifiers)
+ 
+Example 
+```js
+this.block({
+  type: 'myType',
+  isActive: true 
+}) // return 'list list--type-myType list--isActive'
+
+
 ```
 
 ## Modifiers through props
+You can pass modifiers as props when you are using your component
+```js
 
+@bem({
+  block: "list",  // name of your block
+  modifiers: ['size', ''] // list modifiers available through props
+})
+class List extends React.Component{
+
+  render(){
+
+    return(
+      <div className={this.block()}>  // 
+        <div className={this.element('item')}></div>  //  <div class="list__item"></div>
+      </div>
+    )
+  }
+}
+
+class MyApp extends React.Component{
+
+  render(){
+    return <List size="large" isOpened /> // <div class="list list--size-large list--isOpened">...</div>
+  }
+
+}
+```

@@ -23,7 +23,7 @@ module.exports = options => Component => {
 
   Object.assign(Component.prototype, {
 
-    block(passed = {}){
+    block(passedmodifiers = {}){
       let classesSet = [];
       if(this.props.className){
         classesSet.push(this.props.className);
@@ -35,16 +35,16 @@ module.exports = options => Component => {
         modifiersFromProps = (modifiers || [])
           .filter(modifierName=>!!this.props[modifierName])
           .map(modifierName => createModifier(block, modifierName, this.props[modifierName])),
-        modifiersFromArguments = modifiersFromObj(block, passed);
+        modifiersFromArguments = modifiersFromObj(block, passedmodifiers);
 
       classesSet.push(...modifiersFromProps, ...modifiersFromArguments);
 
       return classesSet.join(' ');
     },
 
-    element(){
+    element(elementName, modifiers){
       const
-        elementClass = `${block}__${element}`,
+        elementClass = `${block}__${elementName}`,
         modifiersClasses = modifiersFromObj(elementClass, modifiers);
 
       return [
