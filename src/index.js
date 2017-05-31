@@ -17,43 +17,63 @@ function createModifier(baseClass, modifierName, modifierValue){
   return className;
 }
 
-module.exports = options => Component => {
+function _block(blockName, props = {}, allowedModifiers = [], passedModifiers = {}) {
+
+  const classesSet = [];
+
+  (props.className &&  classesSet.push(props.className));
+
+  classesSet.push(blockName);
+
+  const
+      modifiersFromProps = allowedModifiers
+          .filter(modifierName=>!!props[modifierName])
+          .map(modifierName => createModifier(blockName, modifierName, props[modifierName])),
+      modifiersFromArguments = modifiersFromObj(blockName, passedModifiers);
+
+  classesSet.push(...modifiersFromProps, ...modifiersFromArguments);
+
+  return classesSet.join(' ');
+}
+
+function _element(blockName, elementName, passedModifiers = {}){
+
+  const
+      elementClass = `${blockName}__${elementName}`,
+      modifiersClasses = modifiersFromObj(elementClass, passedModifiers);
+
+  return [
+    elementClass,
+    ...modifiersClasses
+  ].join(' ');
+}
+
+export default options => Component => {
 
   const {block, modifiers} = options;
 
   Object.assign(Component.prototype, {
 
-    block(passedmodifiers = {}){
-      let classesSet = [];
-      if(this.props.className){
-        classesSet.push(this.props.className);
-      }
+    block(passedModifiers){ return _block.call(this, block, this.props, modifiers, passedModifiers) },
 
-      classesSet.push(block);
-
-      const
-        modifiersFromProps = (modifiers || [])
-          .filter(modifierName=>!!this.props[modifierName])
-          .map(modifierName => createModifier(block, modifierName, this.props[modifierName])),
-        modifiersFromArguments = modifiersFromObj(block, passedmodifiers);
-
-      classesSet.push(...modifiersFromProps, ...modifiersFromArguments);
-
-      return classesSet.join(' ');
-    },
-
-    element(elementName, modifiers){
-      const
-        elementClass = `${block}__${elementName}`,
-        modifiersClasses = modifiersFromObj(elementClass, modifiers);
-
-      return [
-        elementClass,
-        ...modifiersClasses
-      ].join(' ');
-    }
+    element(elementName, passedModifiers){return _element.call(this, block, elementName, passedModifiers) }
   });
 
   return Component;
+}
 
-};
+export class Bem {
+
+  constructor(blockName, props = {}, allowedModifiers = []) {
+    this.blockName = blockName;
+    this.props = props;
+    this.allowedModifiers = allowedModifiers;
+  }
+
+  block = (passedModifiers) => _block.call(null, this.blockName, this.props, this.allowedModifiers, passedModifiers)
+
+  element = (elementName, passedModifiers) => _element.call(null, this.blockName, elementName, passedModifiers)
+
+}
+
+
