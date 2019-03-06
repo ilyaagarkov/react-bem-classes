@@ -7,7 +7,7 @@ import { AllowedModifierList, PassedModifierHash } from './types';
 
 export interface InjectedProps {
   bem: {
-    block: (passedModifiers: PassedModifierHash) => string;
+    block: (passedModifiers?: PassedModifierHash) => string;
     element: (elementName: string, passedModifiers: PassedModifierHash) => string;
   };
 }
@@ -21,10 +21,10 @@ export const withBem = ({ block, modifiers }: Options) =>
   /* tslint:disable-next-line */
   <P extends InjectedProps>(Component: React.ComponentType<P>) => {
     return class ComponentWithBem extends React.Component<Subtract<P, InjectedProps>> {
-      block = (passedModifiers: PassedModifierHash) =>
+      block = (passedModifiers?: PassedModifierHash) =>
         blok({ passedModifiers, blockName: block, props: this.props, allowedModifiers: modifiers })
 
-      element = (elementName: string, passedModifiers: PassedModifierHash) =>
+      element = (elementName: string, passedModifiers?: PassedModifierHash) =>
         element({ elementName, passedModifiers, blockName: block })
 
       render() {
