@@ -8,8 +8,8 @@
     "build": "tsc",
     "test": "jest --config jest.config.json",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "ci": "yarn test && yarn lint && yarn build -- --noEmit",
-    "prepublish": "yarn lint && yarn build"
+    "ci-local": "npm test && npm run lint && npm run build -- --noEmit",
+    "ci": "npm run test -- --coverage && npm run lint && npm run build -- --noEmit"
   },
   "engines": {
     "node": ">=8.9"
