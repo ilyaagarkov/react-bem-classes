@@ -1,0 +1,24 @@
+{
+  "preset": "ts-jest",
+  "coverageReporters": ["json", "lcov", "text", "html"],
+  "globals": {
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "ts-jest": {
+      "tsConfig": "tsconfig.json"
+    }
+  },
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "jsx",
+    "js",
+    "json"
+  ],
+  "testMatch": [
+    "**/test/**/*.test.(ts|js|tsx|jsx)"
+  ],
+  "testEnvironment": "node",
+  "testResultsProcessor": "./node_modules/jest-junit-reporter"
+}
