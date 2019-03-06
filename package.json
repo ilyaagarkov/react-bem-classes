@@ -29,10 +29,13 @@
     "url": "https://github.com/ilyaagarkov/react-bem-classes/issues"
   },
   "homepage": "https://github.com/ilyaagarkov/react-bem-classes#readme",
+  "peerDependencies": {
+    "@types/react": "^16.8.6"
+  },
   "devDependencies": {
     "tslint": "^5.13.1",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.3.3333",
-    "@types/react": "^16.8.6"
+    "utility-types": "^3.4.1"
   }
 }

@@ -1,10 +1,11 @@
 import * as React from 'react';
+import { Subtract } from 'utility-types';
 
 import { block as blok } from './block';
 import { element } from './element';
 import { AllowedModifierList, PassedModifierHash } from './types';
 
-interface InjectedProps {
+export interface InjectedProps {
   bem: {
     block: (passedModifiers: PassedModifierHash) => string;
     element: (elementName: string, passedModifiers: PassedModifierHash) => string;
@@ -13,13 +14,13 @@ interface InjectedProps {
 
 interface Options {
   block: string;
-  modifiers: AllowedModifierList;
+  modifiers?: AllowedModifierList;
 }
 
-export const withBem = <P extends InjectedProps>({ block, modifiers }: Options) =>
+export const withBem = ({ block, modifiers }: Options) =>
   /* tslint:disable-next-line */
-  (Component: React.ComponentType<P>) => {
-    return class ComponentWithBem extends React.Component<P> {
+  <P extends InjectedProps>(Component: React.ComponentType<P>) => {
+    return class ComponentWithBem extends React.Component<Subtract<P, InjectedProps>> {
       block = (passedModifiers: PassedModifierHash) =>
         blok({ passedModifiers, blockName: block, props: this.props, allowedModifiers: modifiers })
 
@@ -27,7 +28,13 @@ export const withBem = <P extends InjectedProps>({ block, modifiers }: Options) 
         element({ elementName, passedModifiers, blockName: block })
 
       render() {
-        return <Component {...this.props} />;
+        return <Component
+          {...this.props as P}
+          bem={{
+            block: this.block,
+            element: this.element,
+          }}
+        />;
       }
     };
   };

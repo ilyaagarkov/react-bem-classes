@@ -5,7 +5,7 @@ interface Options extends Config {
   passedModifiers: PassedModifierHash;
 }
 
-export const block = ({ blockName, props, passedModifiers, allowedModifiers }: Options) => {
+export const block = ({ blockName, props, passedModifiers, allowedModifiers = [] }: Options) => {
   const classesSet = [] as string[];
 
   if (props.className) classesSet.push(props.className);
