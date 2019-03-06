@@ -10,7 +10,7 @@ export const createModifier = ({ baseClass, modifierName, modifierValue }: Creat
   if (!modifierValue || modifierValue === false) return '';
 
   let className = `${baseClass}--${modifierName}`;
-  if (modifierValue) className += `-${modifierValue}`;
+  if (modifierValue && typeof modifierValue === 'string') className += `-${modifierValue}`;
 
   return className;
 };

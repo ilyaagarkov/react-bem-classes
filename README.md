@@ -3,7 +3,7 @@
 Use [React](https://facebook.github.io/react/) components with [BEM](https://en.bem.info/method/naming-convention/) class naming convention.
 
 ## Installation
-Please note that you may need to install `@types/react` as part of your project since it is a `peerDependency`.
+Please note that `react` and `@types/react` specified as a `peerDependency`.
 > npm install react-bem-classes
 
 ## API
