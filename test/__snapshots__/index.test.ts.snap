@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BEM provides correct API 1`] = `
+Object {
+  "bem": [Function],
+  "withBem": [Function],
+}
+`;
