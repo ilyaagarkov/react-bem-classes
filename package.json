@@ -30,6 +30,10 @@
     "url": "https://github.com/ilyaagarkov/react-bem-classes/issues"
   },
   "homepage": "https://github.com/ilyaagarkov/react-bem-classes#readme",
+  "peerDependencies": {
+    "react": "^16.8.4",
+    "@types/react": "^16.8.6"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.9",
     "jest": "^24.1.0",
@@ -37,6 +41,7 @@
     "ts-jest": "^24.0.0",
     "tslint": "^5.13.1",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.3333",
+    "utility-types": "^3.4.1"
   }
 }
